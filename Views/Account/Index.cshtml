@@ -7,62 +7,55 @@
 @*@if (Request.IsAuthenticated)*@
 @if (ViewData["login"].ToString() == "True")
 {
-<div class="row">
-    <br />
-    <br />
-    <span class="h3">Welcome @Model.FirstName @Model.LastName</span>
-    @Html.HiddenFor(m => m.Id)
-    @Html.HiddenFor(m => m.Balance)
-    <br />
-    <br />
-    <br />
-    <br />
-    <div>
-        <div class="input-group">
-            <form id="depositForm">
-                <div>
-                    <span class="input-group-addon">Balance</span>
-                    <input type="text" id="balance" class="form-control" disabled="disabled" value="@Model.Balance" />
-                </div>
-                <div>
-                    <span class="input-group-addon">$</span>
-                    <input type="number" required="required" maxlength="6" placeholder="Amount cannot exceed 100,000.00." oninput="if(value.length>6)value=value.slice(0,6)" class="form-control" id="depositAmount">
-                    <input type="submit" value="Deposit" class="btn btn-default" id="deposit" />
+    <div class="row">
+        <br />
+        <br />
+        <span class="h3">Welcome @Model.FirstName @Model.LastName</span>
+        @Html.HiddenFor(m => m.Id)
+        @Html.HiddenFor(m => m.Balance)
+        <br />
+        <br />
+        <br />
+        <br />
+        <div>
+            <div class="input-group">
+                <form id="depositForm">
+                    <div class="row">
+                        <span class="input-group-addon">Balance</span>
+                        <input type="text" id="balance" class="form-control" disabled="disabled" value="@Model.Balance" />
+                    </div><br />
+                    <div class="row">
+                        <span class="input-group-addon">$</span>
+                        <input type="number" required="required" maxlength="6" placeholder="Amount cannot exceed 100,000.00." oninput="if(value.length>6)value=value.slice(0,6)" class="form-control" id="depositAmount">
+                        <input type="submit" value="Deposit" class="btn btn-primary" id="deposit" />
+                    </div><br />
+                </form>
+            </div>
+        </div>
+        <br />
+        <br />
+        <div>
+            <form id="transferForm">
+                <div class="input-group">
+                    <div class="row">
+                        <span class="input-group-addon">Recipient Email</span>
+                        <input type="text" class="form-control" required="required" maxlength="20" oninput="if(value.length>20)value=value.slice(0,20)" id="recipientEmail" />
+                    </div><br />
+                    <div class="row">
+                        <span class="input-group-addon">$</span>
+                        <input type="number" class="form-control" required="required" maxlength="5" oninput="if(value.length>5)value=value.slice(0,5)" id="transferAmount" placeholder="Amount cannot exceed 10,000.00.">
+                        <input type="submit" value="Transfer" class="btn btn-primary" id="transfer" />
+                    </div><br />
                 </div>
             </form>
         </div>
-    </div>
-    <br />
-    <br />
-    <div>
-        <form id="transferForm">
-            <div class="input-group">
-                <div>
-                    <span class="input-group-addon">Recipient Email</span>
-                    <input type="text" class="form-control" required="required" maxlength="20" oninput="if(value.length>20)value=value.slice(0,20)" id="recipientEmail" />
-                </div>
-                <div>
-                    <span class="input-group-addon">$</span>
-                    <input type="number" class="form-control" required="required" maxlength="5" oninput="if(value.length>5)value=value.slice(0,5)" id="transferAmount" placeholder="Amount cannot exceed 10,000.00.">
-                    <input type="submit" value="Transfer" class="btn btn-default" id="transfer" />
-                </div>
-            </div>
-        </form>
-    </div>
 
-    <div id="message"></div>
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    @{
-        Html.RenderAction("RenderTransferHistoryPartialView", "Account");
-    }
-</div>
+        <div id="message"></div>
+        <br />
+        @{
+            Html.RenderAction("RenderTransferHistoryPartialView", "Account");
+        }
+    </div>
 }
 else
 {
